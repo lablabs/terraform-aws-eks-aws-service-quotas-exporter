@@ -1,9 +1,9 @@
-# AWS EKS Universal Addon Terraform module
+# AWS EKS AWS Service Quota Exporter Terraform module
 
-A Terraform module to deploy the universal addon on Amazon EKS cluster.
+A Terraform module to deploy the [aws-service-quota-exporter](https://github.com/lablabs/aws-service-quotas-exporter) on Amazon EKS cluster.
 
-[![Terraform validate](https://github.com/lablabs/terraform-aws-eks-universal-addon/actions/workflows/validate.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-universal-addon/actions/workflows/validate.yaml)
-[![pre-commit](https://github.com/lablabs/terraform-aws-eks-universal-addon/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-universal-addon/actions/workflows/pre-commit.yaml)
+[![Terraform validate](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/validate.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/validate.yaml)
+[![pre-commit](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/pre-commit.yaml)
 
 ---
 
@@ -50,7 +50,7 @@ See [basic example](examples/basic) for further information.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_addon"></a> [addon](#module\_addon) | git::https://github.com/lablabs/terraform-aws-eks-universal-addon.git//modules/addon | v0.0.6 |
-| <a name="module_addon-irsa"></a> [addon-irsa](#module\_addon-irsa) | git::https://github.com/lablabs/terraform-aws-eks-universal-addon.git//modules/addon-irsa | v0.0.6 |
+| <a name="module_addon-irsa"></a> [addon-irsa](#module\_addon-irsa) | git::https://github.com/lablabs/terraform-aws-eks-universal-addon.git//modules/addon-irsa | v0.0.8 |
 ## Resources
 
 | Name | Type |
@@ -84,6 +84,7 @@ See [basic example](examples/basic) for further information.
 | <a name="input_cluster_identity_oidc_issuer"></a> [cluster\_identity\_oidc\_issuer](#input\_cluster\_identity\_oidc\_issuer) | The OIDC Identity issuer for the cluster (required). | `string` |
 | <a name="input_cluster_identity_oidc_issuer_arn"></a> [cluster\_identity\_oidc\_issuer\_arn](#input\_cluster\_identity\_oidc\_issuer\_arn) | The OIDC Identity issuer ARN for the cluster that can be used to associate IAM roles with a Service Account (required). | `string` |
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | Set to false to prevent the module from creating any resources. | `bool` |
+| <a name="input_exporter_config"></a> [exporter\_config](#input\_exporter\_config) | The configuration for the exporter, see https://github.com/lablabs/aws-service-quotas-exporter/blob/main/config/example.yaml | `any` |
 | <a name="input_helm_atomic"></a> [helm\_atomic](#input\_helm\_atomic) | If set, installation process purges chart on fail. The wait flag will be set automatically if atomic is used. Defaults to `false`. | `bool` |
 | <a name="input_helm_chart_name"></a> [helm\_chart\_name](#input\_helm\_chart\_name) | Helm chart name to be installed. Defaults to `local.addon.name` (required). | `string` |
 | <a name="input_helm_chart_version"></a> [helm\_chart\_version](#input\_helm\_chart\_version) | Version of the Helm chart. Defaults to `local.addon.helm_chart_version` (required). | `string` |
