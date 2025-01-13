@@ -3,6 +3,6 @@ examples/basic/main.tf
 main.tf
 addon-oidc.tf
 variables.tf
-variables-oidc.tf
+variables-addon-oidc.tf
 README.md
 .secrets.baseline
