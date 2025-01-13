@@ -1,34 +1,37 @@
 /**
- * # AWS EKS AWS Service Quota Exporter Terraform module
+ * # AWS EKS Universal Addon Terraform module
  *
- * A Terraform module to deploy the [aws-service-quota-exporter](https://github.com/lablabs/aws-service-quotas-exporter) on Amazon EKS cluster.
+ * A Terraform module to deploy the universal addon on Amazon EKS cluster.
  *
- * [![Terraform validate](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/validate.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/validate.yaml)
- * [![pre-commit](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/pre-commit.yaml)
+ * [![Terraform validate](https://github.com/lablabs/terraform-aws-eks-universal-addon/actions/workflows/validate.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-universal-addon/actions/workflows/validate.yaml)
+ * [![pre-commit](https://github.com/lablabs/terraform-aws-eks-universal-addon/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-universal-addon/actions/workflows/pre-commit.yaml)
  */
+# FIXME config: update addon docs above
 locals {
+  # FIXME config: add addon configuration here
   addon = {
-    name = "aws-service-quotas-exporter"
+    name = "universal-addon"
 
-    helm_chart_name    = "aws-service-quotas-exporter"
-    helm_chart_version = "0.0.3"
-    helm_repo_url      = "ghcr.io/lablabs/aws-service-quotas-exporter"
+    helm_chart_name    = "raw"
+    helm_chart_version = "0.1.0"
+    helm_repo_url      = "https://lablabs.github.io"
   }
 
+  # FIXME config: add addon IRSA configuration here or remove if not needed
   addon_irsa = {
-    (local.addon.name) = {}
+    (local.addon.name) = {
+      # FIXME config: add default IRSA overrides here or leave empty if not needed, but make sure to keep at least one key
+    }
+  }
+
+  # FIXME config: add addon OIDC configuration here or remove if not needed
+  addon_oidc = {
+    (local.addon.name) = {
+      # FIXME config: add default OIDC overrides here or leave empty if not needed, but make sure to keep at least one key
+    }
   }
 
   addon_values = yamlencode({
-    serviceAccount = {
-      create = var.service_account_create != null ? var.service_account_create : true
-      name   = var.service_account_name != null ? var.service_account_name : local.addon.name
-      annotations = module.addon-irsa[local.addon.name].irsa_role_enabled ? {
-        "eks.amazonaws.com/role-arn" = module.addon-irsa[local.addon.name].iam_role_attributes.arn
-      } : tomap({})
-    }
-    exporter = {
-      config = var.exporter_config
-    }
+    # FIXME config: add default values here
   })
 }
