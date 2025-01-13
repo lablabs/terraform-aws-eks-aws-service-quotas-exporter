@@ -22,27 +22,7 @@ jobs:
         with:
           token: ${{ steps.template-sync-app-token.outputs.token }}
 
-      - name: Cache ASDF
-        uses: actions/cache@v4
-        id: asdf-cache
-        with:
-          path: ~/.asdf/
-          key: ${{ runner.os }}-asdf-${{ hashFiles('.tool-versions') }}
-          restore-keys: ${{ runner.os }}-asdf-
-
-      - name: Setup ASDF
-        uses: asdf-vm/actions/setup@v3
-        if: ${{ steps.asdf-cache.outputs.cache-hit == 'true' }}
-
-      - name: Install ASDF
-        uses: asdf-vm/actions/install@v3
-        if: ${{ steps.asdf-cache.outputs.cache-hit != 'true' }}
-
-      - name: Reshim installed ASDF tools
-        shell: bash
-        run: asdf reshim
-
-      - name: Sync universal-addon template
+      - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
         with:
           github_token: ${{ steps.template-sync-app-token.outputs.token }}
@@ -53,12 +33,4 @@ jobs:
           pr_title: "feat(sync): sync universal-addon changes"
           pr_commit_msg: "feat(sync): sync universal-addon changes"
           is_pr_cleanup: true
-          is_allow_hooks: true
-          hooks: >
-            precommit:
-              commands:
-                - git checkout -- main.tf variables.tf README.md
-                - git status
-                - git --no-pager diff
-                - git add main.tf variables.tf README.md
-                - pre-commit run terraform_docs -a || true
+          is_keep_branch_on_pr_cleanup: true
