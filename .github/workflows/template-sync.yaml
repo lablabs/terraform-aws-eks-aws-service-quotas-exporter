@@ -10,11 +10,8 @@ permissions: {}
 jobs:
   universal-addon:
     if: github.repository != 'lablabs/terraform-aws-eks-universal-addon'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Install OS dependencies
-        run: sudo apt-get install -y libsqlite3-dev
-
       - name: Generate GitHub App token
         id: template-sync-app-token
         uses: actions/create-github-app-token@v1
@@ -60,7 +57,9 @@ jobs:
           is_pr_cleanup: true
 
       - name: Update README.md
-        run: pre-commit run --show-diff-on-failure --color=always terraform_docs --all-files
+        uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: terraform_docs --all-files
 
       - name: Commit and push README.md
         uses: EndBug/add-and-commit@v9
