@@ -1,9 +1,9 @@
 # AWS EKS AWS Service Quota Exporter Terraform module
 
-A Terraform module to deploy the [aws-service-quota-exporter](https://github.com/lablabs/aws-service-quotas-exporter) on Amazon EKS cluster.
+A Terraform module to deploy the [aws-service-quotas-exporter](https://github.com/lablabs/aws-service-quotas-exporter) on Amazon EKS cluster.
 
-[![Terraform validate](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/validate.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/validate.yaml)
-[![pre-commit](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-aws-service-quota-exporter/actions/workflows/pre-commit.yaml)
+[![Terraform validate](https://github.com/lablabs/terraform-aws-eks-aws-service-quotsa-exporter/actions/workflows/validate.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-aws-service-quotas-exporter/actions/workflows/validate.yaml)
+[![pre-commit](https://github.com/lablabs/terraform-aws-eks-aws-service-quotas-exporter/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/lablabs/terraform-aws-eks-aws-service-quotas-exporter/actions/workflows/pre-commit.yaml)
 
 ---
 
