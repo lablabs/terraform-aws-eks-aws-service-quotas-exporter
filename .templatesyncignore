@@ -1,8 +1,5 @@
 modules
 examples/basic/main.tf
-main.tf
 addon-oidc.tf
-variables.tf
-variables-oidc.tf
-README.md
+variables-addon-oidc.tf
 .secrets.baseline
