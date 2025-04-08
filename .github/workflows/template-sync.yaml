@@ -7,6 +7,10 @@ on:
 
 permissions: {}
 
+concurrency:
+  group: pre-commit
+  cancel-in-progress: false
+
 env:
   # renovate: datasource=github-releases depName=asdf-vm/asdf
   ASDF_VERSION: 31e8c93004abd76253d186b8896785895069749b # v0.15.0 # pragma: allowlist secret
@@ -34,13 +38,19 @@ jobs:
       - name: Sync universal-addon template
         uses: AndreasAugustin/actions-template-sync@bcb94410a4f1dffdfe5eaabc8234c3b8e76ebc5b # v2.5.1
         with:
+          source_gh_token: ${{ steps.template-sync-app-token.outputs.token }}
           source_repo_path: lablabs/terraform-aws-eks-universal-addon
           upstream_branch: main
+
           target_gh_token: ${{ steps.template-sync-app-token.outputs.token }}
+
+          git_remote_pull_params: --allow-unrelated-histories --squash --strategy=recursive --no-tags -X theirs
+
           pr_labels: kind/sync
           pr_branch_name_prefix: "feat/universal-addon-sync"
           pr_title: "feat(sync): sync universal-addon changes"
           pr_commit_msg: "feat(sync): sync universal-addon changes"
+
           is_pr_cleanup: true
 
       - name: Setup ASDF
@@ -77,7 +87,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Update README.md
-        run: pre-commit run --show-diff-on-failure --color=always terraform_docs --all-files
+        run: pre-commit run --show-diff-on-failure --color=always terraform_docs --all-files || true
 
       - name: Commit and push README.md
         uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9.1.4
