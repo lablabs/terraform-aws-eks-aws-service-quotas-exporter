@@ -6,3 +6,5 @@ variables.tf
 variables-addon-oidc.tf
 README.md
 .secrets.baseline
+.github/workflows/renovate.yaml
+renovate.json
