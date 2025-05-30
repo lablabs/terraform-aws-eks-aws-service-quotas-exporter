@@ -31,4 +31,6 @@ locals {
       config = var.exporter_config
     }
   })
+
+  addon_depends_on = []
 }
